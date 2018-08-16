@@ -1,0 +1,24 @@
+package com.st.fox.system.api;
+
+import java.util.Set;
+
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.st.fox.system.api.hystrix.PermissionFeignApiHystrix;
+import com.st.fox.system.api.model.AuthPermission;
+
+/**
+ * @author luozhonghua
+ */
+@FeignClient(name = "business-admin-server", fallback = PermissionFeignApiHystrix.class)
+public interface PermissionFeignApi {
+
+	/**
+	 * 通过角色名查询菜单
+	 */
+	@GetMapping(value = "/api/findMenuByRole/{roleCode}")
+	Set<AuthPermission> findMenuByRole(@PathVariable("roleCode") String roleCode);
+
+}

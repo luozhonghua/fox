@@ -1,0 +1,16 @@
+package com.st.fox.business.commons.web;
+
+/**
+ * 所有controller 需继承此类
+ * 
+ * @author luozhonghua
+ */
+public abstract class BaseController {
+
+	// do anything
+
+	protected static final String	POST	= "POST";
+
+	protected static final String	GET		= "GET";
+
+}

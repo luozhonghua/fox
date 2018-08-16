@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>fw-cloud-business</artifactId>
+	<groupId>com.st.fox.business</groupId>
+	<packaging>pom</packaging>
+	<version>${fw.business.version}</version>
+	<name>fw-cloud-business</name>
+	<description>业务模块</description>
+
+	<parent>
+		<groupId>com.st.fox</groupId>
+		<artifactId>fw-cloud-framework</artifactId>
+		<version>${fw.version}</version>
+	</parent>
+
+	<modules>
+		<!-- business-commons 基础公共模块 -->
+		<module>fw-cloud-business-commons</module>
+
+		<!-- business 业务相关模块服务 -->
+		<module>fw-cloud-business-admin</module>
+        <module>fw-cloud-business-adminitor</module>
+		<module>fw-cloud-business-sso</module>
+        <!--<module>fw-cloud-business-pay</module>
+        <module>fw-cloud-business-wechat</module>-->
+	</modules>
+
+</project>

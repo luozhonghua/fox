@@ -1,0 +1,16 @@
+package com.st.fox.exception;
+
+/**
+ * 验证码校验异常
+ * 
+ * @author luozhonghua
+ */
+public class ValidateCodeException extends RuntimeException {
+
+	private static final long	serialVersionUID	= 8798176161238427050L;
+
+	public ValidateCodeException(String msg) {
+		super(msg);
+	}
+
+}
