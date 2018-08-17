@@ -261,19 +261,18 @@ CREATE TABLE `sys_admin_user` (
   `realname` varchar(100) DEFAULT NULL COMMENT '真实姓名',
   `structure_id` int(11) DEFAULT NULL COMMENT '部门',
   `post_id` int(11) DEFAULT NULL COMMENT '岗位',
-  `group_id` int(11) DEFAULT NULL COMMENT '角色-用户组',
   `status` tinyint(3) DEFAULT NULL COMMENT '状态,1启用0禁用',
   `remark` varchar(100) DEFAULT NULL COMMENT '用户备注',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `last_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8  COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8  COMMENT='用户表'
 
 -- ----------------------------
 -- Records of sys_admin_user
 -- ----------------------------
-INSERT INTO `sys_admin_user` VALUES ('1', 'admin', '62f04a011fbb80030bb0a13701c20b41', '超级管理员', '1', '5',null,'1', '超级管理员', null, null);
-INSERT INTO `sys_admin_user` VALUES ('3', '用户AAAA', 'e10adc3949ba59abbe56e057f20f883e', '用户A', '5', '20', '15','1', '用户A', null, null);
+INSERT INTO `sys_admin_user` VALUES ('1', 'admin', '62f04a011fbb80030bb0a13701c20b41', '超级管理员', '1', '5', '1', '超级管理员', null, null);
+INSERT INTO `sys_admin_user` VALUES ('3', '用户AAAA', 'e10adc3949ba59abbe56e057f20f883e', '用户A', '5', '20', '1', '用户A', null, null);
 
 -- ----------------------------
 -- Table structure for sys_system_config

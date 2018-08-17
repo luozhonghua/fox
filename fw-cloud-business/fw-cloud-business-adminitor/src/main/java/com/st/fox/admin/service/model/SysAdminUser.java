@@ -74,6 +74,21 @@ public class SysAdminUser  extends BaseEntity {
         this.sname = sname;
     }
 
+
+    /**
+     * 岗位名
+     */
+    @Transient
+    private String pname;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
     /**
      * 获取管理后台账号
      *

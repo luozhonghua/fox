@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.st.fox.admin.service.domain.SysLoginService;
+import com.st.fox.admin.service.model.SysAdminMenu;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,8 @@ public class LoginController extends CommonController{
 	private SysAdminMenuService sysAdminMenuService;
 	@Autowired
 	private DefaultKaptcha captchaProducer;
+	@Autowired
+	private SysLoginService sysLoginService;
 	
 	/**
 	 * 登录
@@ -75,6 +79,9 @@ public class LoginController extends CommonController{
 		if(adminUser == null) {
 			return FastJsonUtils.resultError(-100, "帐号与密码错误不正确", null);
 		}
+        if(null==adminUser.getStatus()) {
+            return FastJsonUtils.resultError(-100, "帐号没有生效", null);
+        }
 		if(!adminUser.getStatus().equals(Byte.valueOf("1"))) {
 			return FastJsonUtils.resultError(-100, "帐号已被禁用", null);
 		}
@@ -84,11 +91,11 @@ public class LoginController extends CommonController{
 		data.put("authKey", authKey);
 		data.put("sessionId", request.getSession().getId());
 		data.put("userInfo", adminUser);
-		List<SysAdminRule> rulesTreeList = sysAdminRuleService.getTreeRuleByUserId(adminUser.getId());
-		List<String> rulesList = sysAdminRuleService.rulesDeal(rulesTreeList);
-		data.put("rulesList", rulesList);
-		data.put("menusList", sysAdminMenuService.getTreeMenuByUserId(adminUser.getId()));
-		
+
+        Map<String, Object> map= sysLoginService.retunRuleAndMenu(data,adminUser);
+        if(null!=map.get("rerror")){
+            return FastJsonUtils.resultError(-100, map.get("rerror").toString(), null);
+        }
 		return FastJsonUtils.resultSuccess(200, "登录成功", data);
 	}
 	

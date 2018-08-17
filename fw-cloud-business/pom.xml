@@ -23,8 +23,7 @@
 		<module>fw-cloud-business-admin</module>
         <module>fw-cloud-business-adminitor</module>
 		<module>fw-cloud-business-sso</module>
-        <!--<module>fw-cloud-business-pay</module>
-        <module>fw-cloud-business-wechat</module>-->
+
 	</modules>
 
 </project>

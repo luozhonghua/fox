@@ -15,6 +15,7 @@
     <result column="post_id" jdbcType="INTEGER" property="postId" />
     <result column="status" jdbcType="TINYINT" property="status" />
       <result column="sname" jdbcType="VARCHAR" property="sname" />
+      <result column="pname" jdbcType="VARCHAR" property="pname" />
   </resultMap>
   
   
@@ -27,7 +28,10 @@
   </select>
 
     <select id="selectAll" resultMap="BaseResultMap" >
-        SELECT a.*,b.name AS sname FROM sys_admin_user a,sys_admin_structure b WHERE a.structure_id=b.id
+        SELECT a.*,
+        (SELECT name   FROM sys_admin_structure b WHERE b.id=a.structure_id) AS sname,
+        (SELECT name   FROM sys_admin_post c WHERE c.id=a.post_id) AS pname
+        FROM sys_admin_user a
     </select>
 
   

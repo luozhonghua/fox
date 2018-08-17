@@ -37,7 +37,10 @@ public class SysAdminRuleService extends BaseServiceImpl<SysAdminRule>{
 	 * @param userId 用户id
 	 */
 	public List<SysAdminRule> getTreeRuleByUserId(Integer userId) {
-		List<SysAdminRule> rulesList = getRulesByUserId(userId);
+        List<SysAdminRule> rulesList= getRulesByUserId(userId);
+	    if(null==rulesList){
+             return null;
+        }
 		//处理树
 		List<SysAdminRule> rulesTreeList = this.buildByRecursiveTree(rulesList);
 		return rulesTreeList;
@@ -155,6 +158,9 @@ public class SysAdminRuleService extends BaseServiceImpl<SysAdminRule>{
 		} else {
 			//查询分组
 			List<SysAdminGroup> groupsList = sysAdminGroupDao.selectByUserId(userId, (byte) 1);
+			if(groupsList!=null&&groupsList.size()==0){
+			    return  null;
+            }
 			StringBuffer ruleIds = new StringBuffer(); 
 			for(SysAdminGroup group : groupsList) {
 				if(ruleIds.length() == 0) {

@@ -80,7 +80,6 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
 	}
 
 	public PageInfo<SysAdminUser> getDataList(SysAdminUser record) {
-	    //TODO 查询部门名  多表分页
         if(record.getPage()!=null && record.getRows()!=null) {
              PageHelper.startPage(record.getPage(), record.getRows());
         }

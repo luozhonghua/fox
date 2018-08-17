@@ -1,5 +1,6 @@
 package com.st.fox.admin.service.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,9 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 	public List<SysAdminMenu> getTreeMenuByUserId(Integer userId){
 		//查看用户对应未禁用的菜单
 		List<SysAdminMenu> menusList = getMenusByUserId(userId, (byte)1);
+		if(null==menusList ){
+		    return  null;
+        }
 		//处理树菜单
 		List<SysAdminMenu> menusTreeList = this.buildByRecursiveTree(menusList);
 		return menusTreeList;
@@ -61,7 +65,10 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 		} else {
 			//查询分组
 			List<SysAdminGroup> groupsList = sysAdminGroupDao.selectByUserId(userId, status);
-			StringBuffer ruleIds = new StringBuffer(); 
+            if(groupsList==null || groupsList.size()==0){
+                return  null;
+            }
+            StringBuilder  ruleIds=new StringBuilder();
 			for(SysAdminGroup group : groupsList) {
 				if(ruleIds.length() == 0) {
 					ruleIds.append(group.getRules());
@@ -70,7 +77,12 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 				}
 			}
 			//查询菜单
-			menusList =  sysAdminMenuDao.selectInRuleIds(ruleIds.toString(), 1);
+            String [] st=  ruleIds.toString().split(",");
+			menusList =  sysAdminMenuDao.selectInRuleIds(st, 1);
+            System.out.println("menusList:"+menusList+"\nruleIds:"+ruleIds+" \nst:"+st.toString());
+			if(menusList==null || menusList.size()==0){
+                return null;
+            }
 		} 
 		
 		return menusList;
