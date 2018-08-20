@@ -65,6 +65,7 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 		} else {
 			//查询分组
 			List<SysAdminGroup> groupsList = sysAdminGroupDao.selectByUserId(userId, status);
+			System.out.println("-----------groupsList:"+groupsList);
             if(groupsList==null || groupsList.size()==0){
                 return  null;
             }

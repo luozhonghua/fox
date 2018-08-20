@@ -101,4 +101,13 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
             return sysAdminUserService.save(record);
         }
     }
+
+    /**
+     * 编辑用户-查询
+     * @param id 用户id
+     * @return  用户
+     */
+    public  SysAdminUser selectByUserId(Integer id){
+        return   sysAdminUserDao.findByUserId(id);
+    }
 }

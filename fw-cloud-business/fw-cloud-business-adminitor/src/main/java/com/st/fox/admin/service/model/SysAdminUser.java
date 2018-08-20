@@ -66,20 +66,39 @@ public class SysAdminUser  extends BaseEntity {
     @Transient
     private String sname;
 
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
-
-
     /**
      * 岗位名
      */
     @Transient
     private String pname;
+
+    /**
+     * 角色名称
+     */
+    @Transient
+    private String groupName;
+
+    /**
+     * 角色ID
+     */
+    @Transient
+    private  Integer groupId;
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
     public String getPname() {
         return pname;
@@ -88,6 +107,15 @@ public class SysAdminUser  extends BaseEntity {
     public void setPname(String pname) {
         this.pname = pname;
     }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
 
     /**
      * 获取管理后台账号

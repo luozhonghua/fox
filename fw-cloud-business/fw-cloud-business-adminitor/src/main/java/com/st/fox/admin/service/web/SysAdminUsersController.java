@@ -53,7 +53,7 @@ public class SysAdminUsersController extends CommonController{
 	@GetMapping(value = "edit/{id}", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String read(@PathVariable Integer id, HttpServletRequest request) {
-		SysAdminUser goup = sysAdminUserService.selectByPrimaryKey(id);
+		SysAdminUser goup = sysAdminUserService.selectByUserId(id);//sysAdminUserService.selectByPrimaryKey(id);
 		return FastJsonUtils.resultSuccess(200, "成功", goup);
 	}
 	
