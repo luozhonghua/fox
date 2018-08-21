@@ -1,0 +1,106 @@
+
+https://blog.csdn.net/ltllml44/article/details/51990541?locationNum=2&fps=1
+
+select * from sys_admin_access  
+ where findRole('15',sys_admin_access.group_ids)>0
+ 
+ 
+ 
+CREATE FUNCTION `findRole`(targetStr varchar(2000),findStr varchar(2000))
+ RETURNS varchar(1000)
+	BEGIN
+	DECLARE strNum int;
+	DECLARE lenIndex int DEFAULT 1;
+	DECLARE cStr VARCHAR(50);
+	DECLARE flag INT;  -- 标志位
+	SET strNum=1+(length(targetStr) - length(replace(targetStr,',','')));
+	WHILE lenIndex<=strNum   -- 从一开始循环
+	DO
+	set cStr=reverse(substring_index(reverse(substring_index(targetStr,',',lenIndex)),',',1));-- 这一步的含义请参考函数分解自己实一下，就明白了
+	set flag=FIND_IN_SET(cStr,findStr);
+	if (flag>0&&cStr!='') THEN
+	RETURN flag;
+	END IF;
+	set lenIndex=lenIndex+1;
+	END WHILE;
+	RETURN 0;
+END;--并且进行比较
+
+
+
+
+
+------
+
+select * from sys_admin_access  ;
+
+select * from sys_admin_access  
+ where findRole('15,24,25',sys_admin_access.group_ids)>0;
+
+
+ SELECT
+   
+          t2.id  AS groupId,
+          t2.title  AS groupName
+          FROM  sys_admin_group t2 WHERE
+          t2.id in (REPLACE(t2.id,(SELECT t3.group_Ids   FROM sys_admin_access t3  WHERE 1=1 AND t3.user_id=2),''));
+		  
+-------	  
+		  
+
+
+		  ---bak----
+		        SELECT
+          t3.user_id,
+          t2.id  AS groupId,
+          t2.title  AS groupName
+          FROM sys_admin_access t3,sys_admin_group t2 WHERE 1=1 AND t3.user_id=#{userId} AND t3.group_id = t2.id
+		  
+ 
+
+CREATE  PROCEDURE  sys_admin_access_pr (IN emp_id INT, OUT count_num INT )  
+          READS SQL DATA  
+          BEGIN  
+              SELECT  COUNT(*)  INTO  count_num  
+              FROM  sys_admin_access  
+              WHERE  user_id=emp_id ;  
+          END
+		  
+		  
+		  
+	CREATE  FUNCTION  name_from_employee (emp_id INT )  
+          RETURNS VARCHAR(20)  
+          BEGIN  
+              RETURN  (SELECT  name  
+              FROM  employee  
+              WHERE  num=emp_id );  
+          END	  
+		  
+		  
+		  
+
+		  CREATE FUNCTION   deleteById(uid SMALLINT UNSIGNED) 
+RETURNS VARCHAR(20) 
+BEGIN
+DELETE FROM son WHERE id = uid;
+RETURN (SELECT COUNT(id) FROM son);
+END
+		  
+		  
+ CREATE FUNCTION  StrArrayLeng (str VARCHAR(1024),split VARCHAR(10)) 
+	RETURNS INT
+BEGIN 
+	DECLARE localti INT 
+	DECLARE star INT
+	DECLARE lengt INT 
+	SET str=ltrim(rtrim(str)) 
+	SET localti=charindex(split,str) 
+	SET lengt=1 
+	WHILE localti<>0 
+		BEGIN 
+			SET star=localti+1 
+			SET localti=charindex(split,str,star) 
+			SET lengt=lengt+1 
+		END 
+	RETURN lengt 
+END 

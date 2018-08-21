@@ -47,12 +47,11 @@
 
 
     <select id="findAccessByUserId" parameterType="int"  resultType="com.st.fox.admin.service.model.SysAdminAccess">
-         SELECT
-          t3.user_id,
+          SELECT
           t2.id  AS groupId,
           t2.title  AS groupName
-          FROM sys_admin_access t3,sys_admin_group t2 WHERE 1=1 AND t3.user_id=#{userId} AND t3.group_id = t2.id
-        
+          FROM  sys_admin_group t2 WHERE
+          t2.id in (REPLACE(t2.id,(SELECT t3.group_Ids   FROM sys_admin_access t3  WHERE 1=1 AND t3.user_id=#{userId}),''))
     </select>
 
 
