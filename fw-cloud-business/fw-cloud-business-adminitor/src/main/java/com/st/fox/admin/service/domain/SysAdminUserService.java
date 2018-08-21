@@ -1,6 +1,7 @@
 package com.st.fox.admin.service.domain;
 
 import com.github.pagehelper.PageHelper;
+import com.st.fox.admin.service.model.SysAdminAccess;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,7 +33,10 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
 
     @Autowired
     private SysAdminUserService sysAdminUserService;
-	
+
+    @Autowired
+    private  SysAdminAccessService sysAdminAccessService;
+
 	@Override
 	public Mapper<SysAdminUser> getMapper() {
 		return sysAdminUserDao;
@@ -92,13 +96,30 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
 	public int updateOrSaveUser(SysAdminUser record){
 	    try {
             logger.info("=====id:"+record.getId());
+            //更新用户角色表sys_admin_access
+            StringBuilder sb=new StringBuilder();
+            for(int i=0;i<record.getGroups().length;i++) {  //["15","26"]
+                if(i  == 0) {
+                    sb.append(record.getGroups()[0]);
+                } else {
+                    sb.append(",").append(record.getGroups()[i]);
+                }
+            }
+            SysAdminAccess access = new SysAdminAccess();
+            access.setUserId(record.getId());
+            access.setGroupIds(sb.toString());
+            logger.info(sb.toString()+"====="+FastJsonUtils.toString(record.getGroups()));
+            sysAdminAccessService.saveOrUpdate(access);
+
+
             String md5NewPwd = DigestUtils.md5Hex(record.getPassword());
             record.setPassword(md5NewPwd);
-           // record.setCreateTime(new Date().);
+            // record.setCreateTime(new Date().);
         }catch (Exception e){
 	        throw new RuntimeException(e);
         }finally {
-            return sysAdminUserService.save(record);
+            //TODO 自定义更新用户表sys_admin_user
+            return sysAdminUserDao.update(record);
         }
     }
 

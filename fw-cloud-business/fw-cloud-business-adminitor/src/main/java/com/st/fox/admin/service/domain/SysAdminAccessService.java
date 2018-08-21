@@ -19,4 +19,14 @@ public class SysAdminAccessService extends BaseServiceImpl<SysAdminAccess>{
 		return sysAdminAccessDao;
 	}
 
+	public void saveOrUpdate(SysAdminAccess access){
+       Integer i= sysAdminAccessDao.findAccess(access);
+	    if(i==0)
+        {
+            sysAdminAccessDao.saveAccess(access);
+        }else{
+            sysAdminAccessDao.updateAccess(access);
+        }
+    }
+
 }

@@ -15,4 +15,7 @@ public interface SysAdminGroupDao extends  MyMapper<SysAdminGroup>  {
 	 * @return
 	 */
 	List<SysAdminGroup> selectByUserId(@Param("userId") Integer userId,@Param("status") Byte status);
+
+
+
 }

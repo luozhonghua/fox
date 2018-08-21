@@ -11,4 +11,6 @@ public interface SysAdminUserDao extends  MyMapper<SysAdminUser>  {
     List<SysAdminUser> selectAll();
 
     SysAdminUser findByUserId(@Param("userId") Integer id);
+
+    int update(SysAdminUser user);
 }

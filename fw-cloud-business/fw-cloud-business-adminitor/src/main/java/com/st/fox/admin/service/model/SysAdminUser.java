@@ -7,6 +7,7 @@ import javax.persistence.Transient;
 import com.st.fox.admin.service.base.BaseEntity;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "`sys_admin_user`")
 public class SysAdminUser  extends BaseEntity {
@@ -72,33 +73,35 @@ public class SysAdminUser  extends BaseEntity {
     @Transient
     private String pname;
 
-    /**
-     * 角色名称
-     */
-    @Transient
-    private String groupName;
+
 
     /**
-     * 角色ID
+     * 多个角色
      */
     @Transient
-    private  Integer groupId;
+    private String[] groups;
 
-    public Integer getGroupId() {
-        return groupId;
+
+    @Transient
+    private List<SysAdminAccess> sysAdminAccess;
+
+    public List<SysAdminAccess> getSysAdminAccess() {
+        return sysAdminAccess;
     }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public void setSysAdminAccess(List<SysAdminAccess> sysAdminAccess) {
+        this.sysAdminAccess = sysAdminAccess;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String[] getGroups() {
+        return groups;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setGroups(String[] groups) {
+        this.groups = groups;
     }
+
+
 
     public String getPname() {
         return pname;

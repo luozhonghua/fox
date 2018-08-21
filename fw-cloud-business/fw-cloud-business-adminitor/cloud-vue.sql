@@ -17,19 +17,23 @@ use cloud-vue
 
 SET FOREIGN_KEY_CHECKS=0;
 
+
 -- ----------------------------
--- Table structure for sys_admin_access
+-- Table structure for `sys_admin_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_admin_access`;
 CREATE TABLE `sys_admin_access` (
-  `user_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_admin_access
 -- ----------------------------
-INSERT INTO `sys_admin_access` VALUES ('2', '15');
+INSERT INTO `sys_admin_access` VALUES ('1', '2', '15');
+INSERT INTO `sys_admin_access` VALUES ('2', '10', '26');
 
 -- ----------------------------
 -- Table structure for sys_admin_group

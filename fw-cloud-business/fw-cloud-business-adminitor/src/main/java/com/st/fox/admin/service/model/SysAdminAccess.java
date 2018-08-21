@@ -2,6 +2,7 @@ package com.st.fox.admin.service.model;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.st.fox.admin.service.base.BaseEntity;
 
@@ -14,6 +15,31 @@ public class SysAdminAccess extends BaseEntity {
 
     @Column(name = "`group_id`")
     private Integer groupId;
+
+    @Column(name = "`group_ids`")
+    private  String groupIds;
+
+    public String getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(String groupIds) {
+        this.groupIds = groupIds;
+    }
+
+    /**
+     * 角色名称
+     */
+    @Transient
+    private String groupName;
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
     /**
      * @return user_id
