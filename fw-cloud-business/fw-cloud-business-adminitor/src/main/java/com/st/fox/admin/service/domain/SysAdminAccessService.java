@@ -29,4 +29,8 @@ public class SysAdminAccessService extends BaseServiceImpl<SysAdminAccess>{
         }
     }
 
+    public int delete(Integer userId){
+       return sysAdminAccessDao.deleteAccess(userId);
+    }
+
 }

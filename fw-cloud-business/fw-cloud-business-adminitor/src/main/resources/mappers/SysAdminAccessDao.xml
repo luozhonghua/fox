@@ -11,9 +11,7 @@
     </select>
 
     <insert id="saveAccess" parameterType="com.st.fox.admin.service.model.SysAdminAccess">
-          INSERT IGNORE INTO sys_admin_access(user_id,group_ids)
-          SELECT #{userId},#{groupIds} FROM dual
-          WHERE NOT EXISTS (SELECT * FROM sys_admin_access WHERE  user_id = #{userId))
+          INSERT INTO sys_admin_access(user_id,group_ids) VALUE (#{userId},#{groupIds})
     </insert>
 
     <update id="updateAccess" parameterType="com.st.fox.admin.service.model.SysAdminAccess">
@@ -21,6 +19,10 @@
         SET group_ids = #{groupIds}
         WHERE user_id= #{userId}
     </update>
+
+    <delete id="deleteAccess" parameterType="java.lang.Integer" >
+        DELETE  FROM  sys_admin_access WHERE user_id=#{userId}
+    </delete>
 
 
 </mapper>

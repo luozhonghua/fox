@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.st.fox.admin.service.domain.SysAdminAccessService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
 public class SysAdminUsersController extends CommonController{
 	@Autowired
 	private SysAdminUserService sysAdminUserService;
-	
+
 	/**
 	 * 列表
 	 */
@@ -64,7 +65,7 @@ public class SysAdminUsersController extends CommonController{
 	@PostMapping(value = "save", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String save(@RequestBody(required=false) SysAdminUser record,HttpServletRequest request) {
-		int row = sysAdminUserService.save(record);
+		int row = sysAdminUserService.updateOrSaveUser(record);//sysAdminUserService.save(record);
 		if(row == 0) {
 			return FastJsonUtils.resultError(-200, "保存失败", null);
 		}
@@ -93,7 +94,7 @@ public class SysAdminUsersController extends CommonController{
 	@DeleteMapping(value = "delete/{id}", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String delete(@PathVariable Integer id) {
-		int row = sysAdminUserService.deleteByPrimaryKey(id);
+		int row =sysAdminUserService.deleteUserAndAccess(id);// sysAdminUserService.deleteByPrimaryKey(id);
 		if(row == 0) {
 			return FastJsonUtils.resultError(-200, "删除失败", null);
 		}

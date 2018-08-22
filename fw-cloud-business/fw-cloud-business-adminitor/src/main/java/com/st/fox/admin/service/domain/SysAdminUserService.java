@@ -2,6 +2,7 @@ package com.st.fox.admin.service.domain;
 
 import com.github.pagehelper.PageHelper;
 import com.st.fox.admin.service.model.SysAdminAccess;
+import io.swagger.models.auth.In;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -94,33 +95,49 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
 
 	//save & update  user
 	public int updateOrSaveUser(SysAdminUser record){
+        Integer userId=null;//控制access
+        Integer updateCount=null;
+        StringBuilder sb = new StringBuilder();
+        SysAdminAccess access = new SysAdminAccess();
 	    try {
             logger.info("=====id:"+record.getId());
-            //更新用户角色表sys_admin_access
-            StringBuilder sb=new StringBuilder();
-            for(int i=0;i<record.getGroups().length;i++) {  //["15","26"]
+            //规定密码由个人更改，系统管理员无权更改
+            //String md5NewPwd = DigestUtils.md5Hex(record.getPassword());
+            //record.setPassword(md5NewPwd);
+            // record.setCreateTime(new Date().);
+            if(null==record.getId()){
+                sysAdminUserDao.save(record);
+                userId=record.getId();
+            }else{
+                updateCount= sysAdminUserDao.update(record);
+            }
+            logger.info("=====userId:"+userId);
+            //////处理access中间表逻辑
+            for(int i = 0;i<record.getGroups().length;i++) {  //["15","26"]
                 if(i  == 0) {
                     sb.append(record.getGroups()[0]);
                 } else {
                     sb.append(",").append(record.getGroups()[i]);
                 }
             }
-            SysAdminAccess access = new SysAdminAccess();
-            access.setUserId(record.getId());
+
+            access.setUserId(record.getId()==null?userId:record.getId());
             access.setGroupIds(sb.toString());
-            logger.info(sb.toString()+"====="+FastJsonUtils.toString(record.getGroups()));
+            logger.info(userId+"====="+FastJsonUtils.toString(record.getGroups()));
             sysAdminAccessService.saveOrUpdate(access);
-
-
-            String md5NewPwd = DigestUtils.md5Hex(record.getPassword());
-            record.setPassword(md5NewPwd);
-            // record.setCreateTime(new Date().);
         }catch (Exception e){
+	        e.printStackTrace();
 	        throw new RuntimeException(e);
         }finally {
-            //TODO 自定义更新用户表sys_admin_user
-            return sysAdminUserDao.update(record);
+            try {
+                if(updateCount!=null){
+                    return updateCount;
+                }
+            }catch (RuntimeException e){
+                e.printStackTrace();
+            }
         }
+        return  userId;
     }
 
     /**
@@ -130,5 +147,24 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
      */
     public  SysAdminUser selectByUserId(Integer id){
         return   sysAdminUserDao.findByUserId(id);
+    }
+
+
+    /**
+     * 删除用户和用户角色表
+     * @param userId
+     * @return
+     */
+    public  int deleteUserAndAccess(Integer userId){
+        int flag=0;
+        try {
+            flag= sysAdminUserDao.deleteUser(userId);
+            logger.info("flag1="+flag);
+            flag= sysAdminAccessService.delete(userId);
+            logger.info("flag2="+flag);
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+        return flag;
     }
 }

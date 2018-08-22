@@ -61,6 +61,8 @@ public class SysAdminUser  extends BaseEntity {
     private Byte status;
 
 
+
+
     /**
      * 部门名称
      */

@@ -15,7 +15,6 @@
         <result column="pname" jdbcType="VARCHAR" property="pname" />
 
         <collection property="sysAdminAccess" ofType="com.st.fox.admin.service.model.SysAdminAccess" column="id" select="findAccessByUserId">
-          <result column="user_id" jdbcType="INTEGER" property="userId" />
           <result column="group_id" jdbcType="INTEGER" property="groupId" />
           <result column="groupName" jdbcType="VARCHAR" property="groupName" />
         </collection>
@@ -51,9 +50,13 @@
           t2.id  AS groupId,
           t2.title  AS groupName
           FROM  sys_admin_group t2 WHERE
-          t2.id in (REPLACE(t2.id,(SELECT t3.group_Ids   FROM sys_admin_access t3  WHERE 1=1 AND t3.user_id=#{userId}),''))
+          instr(concat(',',(SELECT  t3.group_Ids   FROM sys_admin_access t3  WHERE 1=1 AND t3.user_id=#{userId}),',' ),concat(',',t2.id,','));
     </select>
 
+    <insert id="save" parameterType="com.st.fox.admin.service.model.SysAdminUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_admin_user (username,password,realname,structure_id,post_id,status,remark,create_time,last_time)
+        VALUE        (#{username},#{password},#{realname},#{structureId},#{postId},#{status},#{remark},#{createTime},#{lastTime});
+    </insert>
 
     <update id="update" parameterType="com.st.fox.admin.service.model.SysAdminUser">
         UPDATE sys_admin_user
@@ -65,4 +68,7 @@
         where id=#{id}
     </update>
 
+    <delete id="deleteUser" parameterType="java.lang.Integer" >
+        DELETE FROM  sys_admin_user WHERE id=#{userId}
+    </delete>
 </mapper>
