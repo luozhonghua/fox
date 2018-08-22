@@ -101,11 +101,11 @@ public class SysAdminUserService extends BaseServiceImpl<SysAdminUser>{
         SysAdminAccess access = new SysAdminAccess();
 	    try {
             logger.info("=====id:"+record.getId());
-            //规定密码由个人更改，系统管理员无权更改
-            //String md5NewPwd = DigestUtils.md5Hex(record.getPassword());
-            //record.setPassword(md5NewPwd);
-            // record.setCreateTime(new Date().);
             if(null==record.getId()){
+                //规定密码由个人更改，系统管理员无权更改
+                String md5NewPwd = DigestUtils.md5Hex(record.getPassword());//新增加密
+                record.setPassword(md5NewPwd);
+                // record.setCreateTime(new Date().);
                 sysAdminUserDao.save(record);
                 userId=record.getId();
             }else{
