@@ -111,9 +111,20 @@ public class SysAdminUsersController extends CommonController{
 	public String deletes(@RequestBody Map<String, Object> params) {
 		@SuppressWarnings("unchecked")
 		List<Integer> ids = (List<Integer>)params.get("ids");
+		List<String> names = (List<String>)params.get("username");
 		if (CollectionUtils.isEmpty(ids)) {
 			return FastJsonUtils.resultError(-200, "操作失败", null);
 		}
+		if (CollectionUtils.isEmpty(names)) {
+			return FastJsonUtils.resultError(-200, "操作失败:"+names, names);
+		}
+
+		for(String name : names){
+			if(name.equals("admin")){
+				return FastJsonUtils.resultError(-200, "操作失败", "管理员不能删除");
+			}
+		}
+
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				sysAdminUserService.deleteByPrimaryKey(ids.get(i));

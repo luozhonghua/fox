@@ -169,8 +169,9 @@ public class SysAdminRuleService extends BaseServiceImpl<SysAdminRule>{
 					ruleIds.append(",").append(group.getRules());
 				}
 			}
+			String [] st=  ruleIds.toString().split(",");
 			//查询权限
-			rulesList = sysAdminRuleDao.selectInIds(ruleIds.toString(), 1);
+			rulesList = sysAdminRuleDao.selectInIds(st, 1);
 		} 
 		return rulesList;
 	}

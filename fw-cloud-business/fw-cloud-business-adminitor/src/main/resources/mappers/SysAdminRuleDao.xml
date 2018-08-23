@@ -14,7 +14,11 @@
   </resultMap>
   
   <select id="selectInIds" resultMap="BaseResultMap">
-  	SELECT * FROM sys_admin_rule t1 WHERE t1.id in(#{ruleIds}) AND t1.status=#{status}
+  	SELECT * FROM sys_admin_rule t1 WHERE 1=1 AND t1.status=#{status}
+  	   AND   t1.id in
+      <foreach collection="ruleIds" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+      </foreach>
   </select>
   
   <select id="selectByStatus" resultMap="BaseResultMap">

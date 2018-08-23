@@ -268,7 +268,7 @@ CREATE TABLE `sys_admin_user` (
   `status` tinyint(3) DEFAULT NULL COMMENT '状态,1启用0禁用',
   `remark` varchar(100) DEFAULT NULL COMMENT '用户备注',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `last_time` timestamp NULL DEFAULT NULL COMMENT '最后更新时间',
+  `last_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 

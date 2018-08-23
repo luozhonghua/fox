@@ -13,14 +13,14 @@
     <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
   
-  <!-- 根据用户id查询分组(角色)信息 -->
+  <!-- 根据用户id查询分组(角色)信息   AND t1.id in (select t2.group_id from sys_admin_access t2 WHERE t2.user_id=#{userId}) -->
   <select id="selectByUserId"  resultMap="BaseResultMap">
   		SELECT * FROM sys_admin_group t1  WHERE 1=1
         <if test="status != null">
             AND   t1.status=#{status}
         </if>
   		<if test="userId != null and userId !=1">
-            AND t1.id in (select t2.group_id from sys_admin_access t2 WHERE t2.user_id=#{userId})
+            AND instr(concat(',',(SELECT  t2.group_Ids   FROM sys_admin_access t2  WHERE 1=1 AND t2.user_id=#{userId}),',' ),concat(',',t1.id,','))
   		</if>
   </select>
 </mapper>
