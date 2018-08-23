@@ -35,7 +35,8 @@ import io.swagger.annotations.ApiOperation;
 public class SysAdminUsersController extends CommonController{
 	@Autowired
 	private SysAdminUserService sysAdminUserService;
-
+    @Autowired
+    private  SysAdminAccessService sysAdminAccessService;
 	/**
 	 * 列表
 	 */
@@ -116,6 +117,7 @@ public class SysAdminUsersController extends CommonController{
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				sysAdminUserService.deleteByPrimaryKey(ids.get(i));
+                sysAdminAccessService.delete(ids.get(i));//TODO
 			}
 		} catch (Exception e) {
 			return FastJsonUtils.resultError(-200, "操作失败", null);
