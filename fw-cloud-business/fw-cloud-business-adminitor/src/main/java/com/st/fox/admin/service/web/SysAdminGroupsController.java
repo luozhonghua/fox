@@ -80,6 +80,8 @@ public class SysAdminGroupsController extends CommonController{
 	@PostMapping(value = "update", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String update(@RequestBody(required=false) SysAdminGroup record,HttpServletRequest request) {
+	    //TODO
+        System.out.println("SysAdminGroup:"+FastJsonUtils.toString(record));
 		int row = sysAdminGroupService.save(record);
 		if(row == 0) {
 			return FastJsonUtils.resultError(-200, "更新失败", null);
@@ -139,7 +141,7 @@ public class SysAdminGroupsController extends CommonController{
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				SysAdminGroup record = new SysAdminGroup();
-				record.setId(Integer.valueOf(ids.get(0)));
+				record.setId(Integer.valueOf(ids.get(i)));
 				record.setStatus(status);
 				sysAdminGroupService.updateByPrimaryKeySelective(record);
 			}

@@ -136,7 +136,7 @@ public class SysAdminPostsController extends CommonController{
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				SysAdminPost record = new SysAdminPost();
-				record.setId(Integer.valueOf(ids.get(0)));
+				record.setId(Integer.valueOf(ids.get(i)));
 				record.setStatus(status);
 				sysAdminPostService.updateByPrimaryKeySelective(record);
 			}

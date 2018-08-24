@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.st.fox.admin.service.util.FastJsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,11 +42,15 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 	public List<SysAdminMenu> getTreeMenuByUserId(Integer userId){
 		//查看用户对应未禁用的菜单
 		List<SysAdminMenu> menusList = getMenusByUserId(userId, (byte)1);
-		if(null==menusList ){
+		if(null==menusList || menusList.size()==0 ){
 		    return  null;
         }
 		//处理树菜单
 		List<SysAdminMenu> menusTreeList = this.buildByRecursiveTree(menusList);
+        System.out.println("---menusTreeList:"+FastJsonUtils.toString(menusTreeList));
+        if(null==menusTreeList || menusTreeList.size()==0 ){
+            return null;
+        }
 		return menusTreeList;
 	}
 	
@@ -80,7 +85,7 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 			//查询菜单
             String [] st=  ruleIds.toString().split(",");
 			menusList =  sysAdminMenuDao.selectInRuleIds(st, 1);
-            System.out.println("menusList:"+menusList+"\nruleIds:"+ruleIds+" \nst:"+st.toString());
+            System.out.println("menusList:"+ FastJsonUtils.toString(menusList)+"\n ruleIds:"+ruleIds);
 			if(menusList==null || menusList.size()==0){
                 return null;
             }

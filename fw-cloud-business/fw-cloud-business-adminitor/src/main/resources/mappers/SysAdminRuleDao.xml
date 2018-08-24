@@ -20,8 +20,8 @@
           #{item}
       </foreach>
   </select>
-  
+  <!--TODO规则是否禁止后显示? SELECT * FROM sys_admin_rule t1 WHERE t1.status = ${status} -->
   <select id="selectByStatus" resultMap="BaseResultMap">
-  	SELECT * FROM sys_admin_rule t1 WHERE t1.status = ${status}
+  	SELECT * FROM sys_admin_rule t1
   </select>
 </mapper>

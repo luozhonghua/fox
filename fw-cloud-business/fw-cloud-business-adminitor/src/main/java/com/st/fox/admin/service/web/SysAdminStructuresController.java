@@ -136,7 +136,7 @@ public class SysAdminStructuresController extends CommonController{
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				SysAdminStructure record = new SysAdminStructure();
-				record.setId(Integer.valueOf(ids.get(0)));
+				record.setId(Integer.valueOf(ids.get(i)));
 				record.setStatus(status);
 				sysAdminStructureService.updateByPrimaryKeySelective(record);
 			}

@@ -136,7 +136,7 @@ public class SysAdminMenusController extends CommonController{
 		try {
 			for (int i = 0; i < ids.size(); i++) {
 				SysAdminMenu record = new SysAdminMenu();
-				record.setId(Integer.valueOf(ids.get(0)));
+				record.setId(Integer.valueOf(ids.get(i)));
 				record.setStatus(status);
 				sysAdminMenuService.updateByPrimaryKeySelective(record);
 			}
