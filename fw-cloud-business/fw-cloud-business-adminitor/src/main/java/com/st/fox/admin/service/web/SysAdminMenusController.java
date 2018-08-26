@@ -77,6 +77,7 @@ public class SysAdminMenusController extends CommonController{
 	@PostMapping(value = "update", produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
 	public String update(@RequestBody(required=false) SysAdminMenu record,HttpServletRequest request) {
+		System.out.println("record:"+FastJsonUtils.toString(record));
 		int row = sysAdminMenuService.save(record);
 		if(row == 0) {
 			return FastJsonUtils.resultError(-200, "操作失败", null);

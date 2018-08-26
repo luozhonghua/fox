@@ -81,11 +81,11 @@ public class BeanToMapUtil {
 		        for (int i = 0; i < propertyDescriptors.length; i++) {  
 		            PropertyDescriptor descriptor = propertyDescriptors[i];  
 		            String propertyName = descriptor.getName();
-		             System.out.println("-----propertyName:"+propertyName);
+		             //System.out.println("-----propertyName:"+propertyName);
 		            if (!propertyName.equals("class")) {  
 		                Method readMethod = descriptor.getReadMethod();  
 		                Object result = readMethod.invoke(bean, new Object[0]);
-                        System.out.println("-----result:"+FastJsonUtils.toString(result)+" readMethod:"+FastJsonUtils.toString(readMethod));
+                       // System.out.println("-----result:"+FastJsonUtils.toString(result)+" readMethod:"+FastJsonUtils.toString(readMethod));
 		                if (result != null) {  
 		                    returnMap.put(propertyName, result);  
 		                } else {
