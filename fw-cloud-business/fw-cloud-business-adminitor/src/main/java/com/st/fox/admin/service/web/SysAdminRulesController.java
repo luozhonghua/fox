@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.st.fox.admin.service.util.BeanToMapUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,6 +44,7 @@ public class SysAdminRulesController extends CommonController{
 	@ResponseBody
 	public String index(String type, HttpServletRequest request) {
 		List<Map<String, Object>> rules = sysAdminRulesService.getDataList(this.getCurrentUser().getId(),type != null ? type : "");
+		//JSONArray jsonArray=BeanToMapUtil.listToTree(JSONArray.parseArray(JSON.toJSONString(rules)),"id","pid","child");
 		return FastJsonUtils.resultSuccess(200, "成功", rules);
 	}
 	

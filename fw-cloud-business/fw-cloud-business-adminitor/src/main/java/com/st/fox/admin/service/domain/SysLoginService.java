@@ -26,17 +26,17 @@ public class SysLoginService   {
         Map<String, Object> errerMap=new HashMap<String, Object>();
         List<SysAdminRule> rulesTreeList = sysAdminRuleService.getTreeRuleByUserId(adminUser.getId());
         if(null==rulesTreeList ){
-            errerMap.put("rerror","帐号没有角色权限");
+            errerMap.put("rerror","帐号角色权限限制");
             return  errerMap;
         }
         List<String> rulesList = sysAdminRuleService.rulesDeal(rulesTreeList);
         if(null==rulesList){
-            errerMap.put("rerror","帐号规则设置错误");
+            errerMap.put("rerror","帐号规则授权限制");
             return  errerMap;
         }
         List<SysAdminMenu> menulist= sysAdminMenuService.getTreeMenuByUserId(adminUser.getId());
         if(null==menulist){
-            errerMap.put("rerror","帐号菜单设置错误");
+            errerMap.put("rerror","帐号菜单授权限制");
             return  errerMap;
         }
         data.put("rulesList", rulesList);

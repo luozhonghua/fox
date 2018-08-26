@@ -70,7 +70,7 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 		} else {
 			//查询分组
 			List<SysAdminGroup> groupsList = sysAdminGroupDao.selectByUserId(userId, status);
-			System.out.println("-----------groupsList:"+groupsList);
+			System.out.println("groupsList:"+FastJsonUtils.toString(groupsList));
             if(groupsList==null || groupsList.size()==0){
                 return  null;
             }
@@ -102,9 +102,9 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 	private List<SysAdminMenu> buildByRecursiveTree(List<SysAdminMenu> rootSysAdminMenus){
 	    List<SysAdminMenu> trees = new ArrayList<SysAdminMenu>();
 	    for(SysAdminMenu menu : rootSysAdminMenus) {
-	    	if ("0".equals(menu.getPid().toString())) {  
+	    	if ("0".equals(menu.getPid().toString()) ) {  //TODO 根节点递归？  其他非根节点无法登陆？
                 trees.add(getChild(menu,rootSysAdminMenus, 1));  
-            }  
+            }
 	    }
 	    return trees;
 	}
@@ -121,7 +121,7 @@ public class SysAdminMenuService extends BaseServiceImpl<SysAdminMenu>{
 	 * @return
 	 */
 	private SysAdminMenu getChild(SysAdminMenu treeMenu, List<SysAdminMenu> treeNodes, int level) {
-		treeMenu.setSelected(false);
+		treeMenu.setSelected(false); //TODO 默认不选择？
 		treeMenu.setLevel(level);
 		for (SysAdminMenu it : treeNodes) {
 			if (treeMenu.getId().equals(it.getPid())) {
