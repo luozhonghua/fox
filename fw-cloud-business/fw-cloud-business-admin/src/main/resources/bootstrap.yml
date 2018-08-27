@@ -38,7 +38,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://admin:liuweijw@47.106.144.24:1001/eureka
+      defaultZone: http://admin:liuweijw@localhost:1001/eureka
 business:
   permission:
     enabled: true

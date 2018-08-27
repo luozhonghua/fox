@@ -5,10 +5,10 @@ spring:
     active: dev
     include: swagger
   devtools:
-    restart:
-        enabled: false
-    livereload:
-        enabled: false
+   restart:
+       enabled: false
+   livereload:
+       enabled: false
   cloud:
     config:
       fail-fast: true
@@ -19,9 +19,18 @@ spring:
       label: ${spring.profiles.active}
 
 
+
+
 ---
 spring:
   profiles: dev
+  #http:
+  #  multipart:
+   #   location: D:/test
+   #   enabled: true
+   #   file-size-threshold: 0
+   #   max-file-size: 1Mb
+   #   max-request-size: 10Mb
 eureka:
   instance:
     prefer-ip-address: true
@@ -47,7 +56,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://admin:liuweijw@47.106.144.24:1001/eureka
+      defaultZone: http://admin:liuweijw@localhost:1001/eureka
 business:
   permission:
     enabled: true

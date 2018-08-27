@@ -10,7 +10,7 @@ logging:
      tk:
        mybatis: TRACE
      com:
-      framework: TRACE
+       framework: TRACE
 
 druid:
     url: jdbc:mysql://localhost:3306/cloud-vue?useUnicode=true&characterEncoding=utf8&useSSL=false

@@ -33,7 +33,7 @@ cache:
 ribbon:
   eager-load:
     enabled: true
-    clients: system-auth-server,business-admin-server
+    clients: system-auth-server,business-admin-server,business-administor-server
   Httpclient:
     enable: false
   OkHttp:

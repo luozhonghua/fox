@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.fox.admin.service.dao.SysAdminRuleDao">
+  <resultMap id="BaseResultMap" type="com.st.fox.admin.service.model.SysAdminRule">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  
+  <select id="selectInIds" resultMap="BaseResultMap">
+  	SELECT * FROM sys_admin_rule t1 WHERE 1=1 AND t1.status=#{status}
+  	   AND   t1.id in
+      <foreach collection="ruleIds" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+      </foreach>
+  </select>
+  <!--TODO规则是否禁止后显示? SELECT * FROM sys_admin_rule t1 WHERE t1.status = ${status} -->
+  <select id="selectByStatus" resultMap="BaseResultMap">
+  	SELECT * FROM sys_admin_rule t1
+  </select>
+</mapper>
