@@ -75,7 +75,7 @@ public class Category {
 	private void _searchList( Object cid, String space, int level, Object pname){
 		List<Map<String, Object>> childs = this.getChild(cid);
 		//如果没有下级分类，结束递归
-		if(CollectionUtils.isEmpty(childs)) {
+		if(CollectionUtils.isEmpty(childs) && childs.size()==0) {
 			return;
 		}
 		int n = childs.size();
