@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.fox.admin.service.dao.SysAdminAccessDao">
+  <resultMap id="BaseResultMap" type="com.st.fox.admin.service.model.SysAdminAccess">
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+  </resultMap>
+
+    <select id="findAccess" resultType="java.lang.Integer" parameterType="com.st.fox.admin.service.model.SysAdminAccess">
+        SELECT count(1) from sys_admin_access where user_id=#{userId}
+    </select>
+
+    <insert id="saveAccess" parameterType="com.st.fox.admin.service.model.SysAdminAccess">
+          INSERT INTO sys_admin_access(user_id,group_ids) VALUE (#{userId},#{groupIds})
+    </insert>
+
+    <update id="updateAccess" parameterType="com.st.fox.admin.service.model.SysAdminAccess">
+        UPDATE sys_admin_access
+        SET group_ids = #{groupIds}
+        WHERE user_id= #{userId}
+    </update>
+
+    <delete id="deleteAccess" parameterType="java.lang.Integer" >
+        DELETE  FROM  sys_admin_access WHERE user_id=#{userId}
+    </delete>
+
+
+</mapper>
