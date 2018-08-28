@@ -16,10 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableEurekaClient
 //@EnableWebMvc
 @MapperScan(basePackages={"com.st.fox.admin.service.dao","com.framework.common.base"})
-public class FWadministorServiceApplication extends WebMvcConfigurerAdapter  {
+//@ComponentScan(basePackages = { "com.st.fox.admin.service.dao", "com.st.fox.core", "com.st.fox.business.commons.web", "com.st.fox.system.api" })
+//@EnableTransactionManagement
+//@MapperScan("com.st.fox.admin.service.dao")
+public class FWDemostorServiceApplication extends WebMvcConfigurerAdapter  {
 	
     public static void main(String[] args) {
-    	SpringApplication.run(FWadministorServiceApplication.class, args);
+    	SpringApplication.run(FWDemostorServiceApplication.class, args);
     }
 
 }	

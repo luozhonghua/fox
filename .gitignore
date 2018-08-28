@@ -3,9 +3,9 @@
 .classpath
 /target
 .factorypath
+*.iml
 *.class
 *.log
 .iml
 .git
-*.iml
  

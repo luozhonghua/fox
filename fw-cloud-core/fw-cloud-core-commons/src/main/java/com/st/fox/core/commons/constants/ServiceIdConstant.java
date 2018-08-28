@@ -14,4 +14,10 @@ public interface ServiceIdConstant {
 	 * ADMIN模块
 	 */
 	String	ADMIN_SERVICE	= "business-admin-server";
+
+
+    /**
+     * ADMINI模块
+     */
+    String	ADMINI_SERVICE	= "business-admin-server";
 }
