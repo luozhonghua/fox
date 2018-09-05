@@ -96,7 +96,7 @@
 		<!-- 框架核心 -->
 		<module>fw-cloud-system</module>
 		<!-- 监控模块 -->
-		<!--<module>fw-cloud-monitor</module>-->
+		 <!--<module>fw-cloud-monitor</module>-->
 	</modules>
 
 	<dependencyManagement>

@@ -152,7 +152,7 @@ public class SysAdminRuleService extends BaseServiceImpl<SysAdminRule>{
                 List<Map<String, Object>> rawList = Lists.newArrayList();
                 rulesList.forEach((m) -> {
                     Map<String, Object> map = BeanToMapUtil.convertBean(m);
-                    map.put("check", false);
+                    map.put("check", false);//TODO 根节点默认不选
                     rawList.add(map);
                 });
                 return rawList;

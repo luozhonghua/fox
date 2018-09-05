@@ -1,29 +1,25 @@
-package com.st.fox.system.eureka;
+package com.st.fox.monitor.zipkindb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-/**
- * Eureka Server 中心
- * 
- * @author luozhonghua
- */
-@EnableEurekaServer
+import zipkin.server.EnableZipkinServer;
+
+@EnableDiscoveryClient
 @SpringBootApplication
-public class FwEurekaApplication extends SpringBootServletInitializer {
+@EnableZipkinServer
+public class FwMonitorZipkenDbApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(FwEurekaApplication.class);
+		return application.sources(FwMonitorZipkenDbApplication.class);
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(FwEurekaApplication.class, args);
+		SpringApplication.run(FwMonitorZipkenDbApplication.class, args);
 	}
-
-
 
 }
