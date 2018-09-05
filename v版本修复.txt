@@ -1,1 +1,5 @@
-2018.8.23  修复了用户登陆菜单权限，修复了in字符串解析
+﻿2018.8.23  修复了用户登陆菜单权限，修复了in字符串解析
+
+
+##############
+localhost:1004/oauth/authorize?client_id=com.github.liuweijw&redirect_uri=http://localhost:3001/sso/login&response_type=code&scope=server&state=W54MqH
