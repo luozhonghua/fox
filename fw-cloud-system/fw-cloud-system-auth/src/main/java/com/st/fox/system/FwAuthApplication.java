@@ -19,7 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 // modelA的java包结构是：com.st.fox.system.auth.xxx
 // modelB的java包结构是：com.st.fox.system.api.xxx
 // modelB将来要发布成一个jar包，modelA中会依赖modelB的jar包。在测试的时候发现，在modelA中启动时无法扫描到modelB中声明的那些component
-// 固在此调整入口FwAuthApplication路径为com.github.liuweijw.system
+// 固在此调整入口FwAuthApplication路径为com.st.fox.system
 @ComponentScan(basePackages = { "com.st.fox.system", "com.st.fox.core" })
 public class FwAuthApplication extends SpringBootServletInitializer {
 
