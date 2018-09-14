@@ -33,6 +33,29 @@
 			<groupId>com.github.axet</groupId>
 			<artifactId>kaptcha</artifactId>
 		</dependency>
+
+        <!--auth sso client-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-web</artifactId>-->
+            <!--<version>2.0.3.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+            <!--<version>2.0.3.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security.oauth</groupId>-->
+            <!--<artifactId>spring-security-oauth2</artifactId>-->
+            <!--<version>2.3.3.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security.oauth.boot</groupId>-->
+            <!--<artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+            <!--<version>2.0.1.RELEASE</version>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <build>
@@ -44,23 +67,23 @@
                     <finalName>${project.name}</finalName>
                 </configuration>
             </plugin>
-			<plugin>
-			    <groupId>com.mysema.maven</groupId>
-			    <artifactId>apt-maven-plugin</artifactId>
-			    <version>1.1.3</version>
-			    <executions>
-			        <execution>
-			            <phase>generate-sources</phase>
-			            <goals>
-			                <goal>process</goal>
-			            </goals>
-			            <configuration>
-			                <outputDirectory>target/generated-sources</outputDirectory>
-			                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-			            </configuration>
-			        </execution>
-			    </executions>
-			</plugin>
+			<!--<plugin>-->
+			    <!--<groupId>com.mysema.maven</groupId>-->
+			    <!--<artifactId>apt-maven-plugin</artifactId>-->
+			    <!--<version>1.1.3</version>-->
+			    <!--<executions>-->
+			        <!--<execution>-->
+			            <!--<phase>generate-sources</phase>-->
+			            <!--<goals>-->
+			                <!--<goal>process</goal>-->
+			            <!--</goals>-->
+			            <!--<configuration>-->
+			                <!--<outputDirectory>target/generated-sources</outputDirectory>-->
+			                <!--<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>-->
+			            <!--</configuration>-->
+			        <!--</execution>-->
+			    <!--</executions>-->
+			<!--</plugin>-->
 			<!-- 跳过单元测试 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.st.fox.business.admin.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,11 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.st.fox.business.admin.cache.AdminCacheKey;
-import com.st.fox.business.admin.domain.QRoleMenu;
-import com.st.fox.business.admin.domain.QRoleMenuPermission;
-import com.st.fox.business.admin.domain.Role;
-import com.st.fox.business.admin.domain.RoleMenu;
-import com.st.fox.business.admin.domain.RoleMenuPermission;
 import com.st.fox.business.admin.repository.RoleMenuPermissionRepository;
 import com.st.fox.business.admin.repository.RoleMenuRepository;
 import com.st.fox.business.admin.service.PermissionService;

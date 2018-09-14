@@ -2,12 +2,12 @@ package com.st.fox.business.admin.service.impl;
 
 import java.util.List;
 
+import com.st.fox.business.admin.domain.QDeptRelation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.st.fox.business.admin.domain.DeptRelation;
-import com.st.fox.business.admin.domain.QDeptRelation;
 import com.st.fox.business.admin.repository.DeptRelationRepository;
 import com.st.fox.business.admin.service.DeptRelationService;
 import com.st.fox.business.commons.web.jpa.JPAFactoryImpl;

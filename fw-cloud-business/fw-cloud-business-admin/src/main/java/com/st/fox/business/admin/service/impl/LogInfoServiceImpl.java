@@ -2,6 +2,7 @@ package com.st.fox.business.admin.service.impl;
 
 import java.util.List;
 
+import com.st.fox.business.admin.domain.QLogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.st.fox.business.admin.domain.LogInfo;
-import com.st.fox.business.admin.domain.QLogInfo;
 import com.st.fox.business.admin.repository.LogInfoRepository;
 import com.st.fox.business.admin.service.LogInfoService;
 import com.st.fox.business.commons.utils.PageUtils;

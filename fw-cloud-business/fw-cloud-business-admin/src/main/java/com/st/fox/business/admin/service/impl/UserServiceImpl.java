@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Query;
 
+import com.st.fox.business.admin.domain.*;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.st.fox.business.admin.beans.UserBean;
 import com.st.fox.business.admin.beans.UserForm;
 import com.st.fox.business.admin.cache.AdminCacheKey;
-import com.st.fox.business.admin.domain.QRole;
-import com.st.fox.business.admin.domain.QUser;
-import com.st.fox.business.admin.domain.QUserRole;
-import com.st.fox.business.admin.domain.Role;
-import com.st.fox.business.admin.domain.User;
-import com.st.fox.business.admin.domain.UserRole;
 import com.st.fox.business.admin.repository.UserRepository;
 import com.st.fox.business.admin.repository.UserRoleRepository;
 import com.st.fox.business.admin.service.PermissionService;

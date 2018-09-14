@@ -12,6 +12,17 @@ spring:
       profile: ${spring.profiles.active}
       label: ${spring.profiles.active}
 
+#security:
+#  oauth2:
+#    client:
+#      client-id: ENC(eZLNwFxeSKENBh1pu/M/rMMB76nxo/RLhWSaSLHa8+0=)
+#      client-secret: ENC(sKbpJGHz9JZmdydv1WOyAYjyXm2irxc0xYqvQ6VpF31uEw/FVNxYeA==)
+#      user-authorization-uri: http://localhost:1004/oauth/authorize
+#      access-token-uri: http://localhost:1004/oauth/token
+#      scope: server
+#    resource:
+#      jwt:
+#        key-value: ENC(fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4=)
 ---
 spring:
   profiles: dev

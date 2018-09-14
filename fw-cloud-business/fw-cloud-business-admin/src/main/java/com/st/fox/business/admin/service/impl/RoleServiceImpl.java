@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import com.st.fox.business.admin.domain.QRole;
+import com.st.fox.business.admin.domain.QRoleDept;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONObject;
 import com.st.fox.business.admin.beans.RoleDeptBean;
 import com.st.fox.business.admin.cache.AdminCacheKey;
-import com.st.fox.business.admin.domain.QRole;
-import com.st.fox.business.admin.domain.QRoleDept;
 import com.st.fox.business.admin.domain.Role;
 import com.st.fox.business.admin.domain.RoleDept;
 import com.st.fox.business.admin.repository.DeptRepository;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.st.fox.business.admin.domain.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -14,11 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.st.fox.business.admin.cache.AdminCacheKey;
-import com.st.fox.business.admin.domain.Menu;
-import com.st.fox.business.admin.domain.Module;
-import com.st.fox.business.admin.domain.QMenu;
-import com.st.fox.business.admin.domain.QRoleMenu;
-import com.st.fox.business.admin.domain.Role;
 import com.st.fox.business.admin.repository.MenuRepository;
 import com.st.fox.business.admin.service.MenuService;
 import com.st.fox.business.admin.service.ModuleService;

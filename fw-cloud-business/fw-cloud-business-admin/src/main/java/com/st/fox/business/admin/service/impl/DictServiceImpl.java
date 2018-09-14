@@ -3,6 +3,7 @@ package com.st.fox.business.admin.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.st.fox.business.admin.domain.QDict;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -15,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.st.fox.business.admin.cache.AdminCacheKey;
 import com.st.fox.business.admin.domain.Dict;
-import com.st.fox.business.admin.domain.QDict;
 import com.st.fox.business.admin.repository.DictRepository;
 import com.st.fox.business.admin.service.DictService;
 import com.st.fox.business.commons.utils.PageUtils;
