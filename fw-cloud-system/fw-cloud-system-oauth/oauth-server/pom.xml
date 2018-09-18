@@ -11,8 +11,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>oauth-server</artifactId>
-    <packaging>jar</packaging>
     <name>oauth-server</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
