@@ -15,7 +15,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http
-				.authorizeRequests()
+				.authorizeRequests().antMatchers("/", "/login**").permitAll()  //请求授权，后面的需要授权
 				.anyRequest()
 				.authenticated()
 				.and()

@@ -14,6 +14,8 @@ import com.st.fox.system.auth.component.ajax.AjaxSecurityConfigurer;
 
 /**
  * @author luozhonghua 认证服务器开放接口配置
+ * 资源服务端
+   实现方式，主要复写ResourceServerConfigurerAdapter实现
  */
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER - 2)
 @Configuration

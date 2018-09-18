@@ -3,6 +3,7 @@ package com.st.fox.admin.service.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.st.fox.admin.service.util.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +40,13 @@ public class UploadController extends CommonController {
         String path = UploadUtils.saveMartipartFile(multipartLocation, request,file,"users","yyyyMM");
         return FastJsonUtils.resultSuccess(1, "上传成功",path);
 	}
+
+    // 上传文件(支持批量)
+    @RequestMapping("/down")
+    @ApiOperation(value = "下载", httpMethod="POST")
+    public String downImage(MultipartFile file, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        FileUtils.downloadFile("xx","temxx",request,response);
+        return FastJsonUtils.resultSuccess(1, "下载成功","");
+    }
+
 }

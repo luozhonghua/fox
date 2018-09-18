@@ -1,5 +1,9 @@
 server:
   port: 2002
+#  servlet:
+#    session:
+#      cookie:
+#        name: UISESSIONCOUPON
 
 redis:
   cache:
@@ -54,6 +58,9 @@ sharding:
                 sharding-column: id
                 algorithm-expression: t_sys_log_${id % 2}
             key-generator-column-name: id
+
+
+
 
 logging:
   config: classpath:logback.xml

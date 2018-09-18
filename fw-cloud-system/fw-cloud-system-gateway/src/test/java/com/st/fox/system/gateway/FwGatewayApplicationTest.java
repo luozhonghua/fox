@@ -20,6 +20,9 @@ public class FwGatewayApplicationTest {
 	@Test
 	public void testEnvironmentProperties() {
 
+
+
+
         System.out.println("=====com.github.liuweijw eZLNwFxeSKENBh1pu/M/rMMB76nxo/RLhWSaSLHa8+0==========="
                 + stringEncryptor.decrypt("eZLNwFxeSKENBh1pu/M/rMMB76nxo/RLhWSaSLHa8+0=")) ;
 

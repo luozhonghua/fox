@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,11 +32,16 @@ import com.st.fox.core.configuration.JwtConfiguration;
 
 /**
  * @author luozhonghua 认证服务器逻辑实现
+ * 提供认证、授权服务
+ * 对称加密，表示认证服务端和认证客户端的共用一个密钥
+ *
  */
 @Configuration
 @Order(Integer.MIN_VALUE)
 @EnableAuthorizationServer
 public class FwAuthorizationConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    private static final Logger logger = LoggerFactory.getLogger(FwAuthorizationConfiguration.class);
 
 	@Autowired
 	private AuthServerConfiguration	authServerConfiguration;
@@ -43,7 +50,7 @@ public class FwAuthorizationConfiguration extends AuthorizationServerConfigurerA
 	private JwtConfiguration		jwtConfiguration;
 
 	@Autowired
-	private AuthenticationManager	authenticationManager;
+	private AuthenticationManager	authenticationManager; //使用默认的认证管家
 
 	@Autowired
 	private UserDetailsService		userDetailsService;
@@ -51,17 +58,30 @@ public class FwAuthorizationConfiguration extends AuthorizationServerConfigurerA
 	@Autowired
 	private RedisConnectionFactory	redisConnectionFactory;
 
+    /**
+     *  配置客户端详情信息(内存或JDBC来实现)
+     * @param clients
+     * @throws Exception
+     */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        //clients.jdbc() TODO 数据库存储-ui管理:n个客户端
+        logger.info("-------------ClientId= "+authServerConfiguration.getClientId());
+        logger.info("-------------ClientSecret= "+authServerConfiguration.getClientSecret());
+        logger.info("-------------Scope= "+authServerConfiguration.getScope());
 		clients.inMemory()
-				.withClient(authServerConfiguration.getClientId())
-				.secret(authServerConfiguration.getClientSecret())
-				.authorizedGrantTypes(SecurityConstant.REFRESH_TOKEN, SecurityConstant.PASSWORD, SecurityConstant.AUTHORIZATION_CODE)
-				.scopes(authServerConfiguration.getScope())
+				.withClient(authServerConfiguration.getClientId()) //接受的clientId
+				.secret(authServerConfiguration.getClientSecret()) //默认secret
+				.authorizedGrantTypes(SecurityConstant.REFRESH_TOKEN, SecurityConstant.PASSWORD, SecurityConstant.AUTHORIZATION_CODE) //授权模式
+				.scopes(authServerConfiguration.getScope()) //范围:用户认证 or 服务认证
 				// true 直接跳转到客户端页面，false 跳转到用户确认授权页面
 				.autoApprove(true);
 	}
 
+    /**
+     *  spring security token的生成方式
+     * @param endpoints 用来配置授权以及令牌的访问端点和令牌服务（比如：配置令牌的签名与存储方式）
+     */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
@@ -73,12 +93,17 @@ public class FwAuthorizationConfiguration extends AuthorizationServerConfigurerA
 				.userDetailsService(userDetailsService);
 	}
 
+    /**
+     *
+     * @param security  用来配置令牌端点的安全约束
+     * @throws Exception
+     */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.allowFormAuthenticationForClients()
 				// 获取JWt加密key: /oauth/token_key 采用RSA非对称加密时候使用。对称加密禁止访问
 				// .tokenKeyAccess("isAuthenticated()")
-				.checkTokenAccess("permitAll()");
+				.checkTokenAccess("permitAll()"); //能够获取token的
 	}
 
 	@Bean
@@ -86,11 +111,15 @@ public class FwAuthorizationConfiguration extends AuthorizationServerConfigurerA
 		return new BCryptPasswordEncoder();
 	}
 
+    /**
+     * AccessToken转换器-定义token的生成方式，这里使用JWT生成token，对称加密只需要加入key等其他信息（自定义）
+     * @return
+     */
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
 		FwJwtAccessTokenConverter jwtAccessTokenConverter = new FwJwtAccessTokenConverter();
 		jwtAccessTokenConverter.setSigningKey(jwtConfiguration.getJwtkey());
-		// log.info("Initializing JWT with public key:\n" + authServerConfiguration.getPublicKey());
+        logger.info("-------------Initializing JWT with public key:\n" + authServerConfiguration.getPublicKey());
 
 		// 采用RSA非对称加密
 		// JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();

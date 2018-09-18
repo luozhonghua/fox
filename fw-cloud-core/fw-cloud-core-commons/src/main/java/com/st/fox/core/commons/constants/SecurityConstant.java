@@ -138,5 +138,5 @@ public interface SecurityConstant {
 	/**
 	 * 前缀
 	 */
-	String	PREFIX								= "liuweijw_";
+	String	PREFIX								= "luozhonghua_"; //liuweijw_
 }

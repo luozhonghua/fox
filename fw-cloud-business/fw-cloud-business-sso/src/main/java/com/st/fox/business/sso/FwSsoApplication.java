@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * @author luozhonghua
  */
-@EnableOAuth2Sso
+//@EnableOAuth2Sso
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
 @ComponentScan(basePackages = { "com.st.fox.business.sso" })
 public class FwSsoApplication {

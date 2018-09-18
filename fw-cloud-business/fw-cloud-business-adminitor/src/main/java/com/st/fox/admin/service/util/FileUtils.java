@@ -1,18 +1,12 @@
 package com.st.fox.admin.service.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
+import java.net.URLEncoder;
 
 import org.apache.commons.lang.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /****
@@ -297,5 +291,55 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			ex.printStackTrace();
 		}
 	}
+
+
+    /**
+     * 下载
+     * @param fileName  文件名
+     * @param tmpFileName 临时文件名
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    public static void downloadFile(String fileName, String tmpFileName, HttpServletRequest request, HttpServletResponse response)   {
+        BufferedOutputStream bos=null;
+        try {
+                if(org.springframework.util.StringUtils.isEmpty(fileName) && org.springframework.util.StringUtils.isEmpty(tmpFileName)){
+                    return;
+                }
+                File file = new File(tmpFileName);
+                if(!file.exists()) {
+                    return;
+                }
+                String postfix = tmpFileName.substring(tmpFileName.lastIndexOf("."));
+                response.reset();
+                String userAgent = request.getHeader("User-Agent");
+                if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+                    response.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(fileName, "utf-8") + postfix+"\"");
+                } else {
+                    fileName = new String(fileName.getBytes("utf-8"),"ISO-8859-1"); // 下载的文件名显示编码处理
+                    response.setHeader("Content-Disposition", "attachment;filename=\"" + fileName + postfix+"\"");
+                }
+                response.setContentType("application/x-msdownload;charset=UTF-8");
+                FileInputStream fis = new FileInputStream(file);
+                bos = new BufferedOutputStream(response.getOutputStream());
+
+                byte[] buffer = new byte[2048];
+                int readlength = 0;
+                while((readlength = fis.read(buffer)) != -1){
+                    bos.write(buffer,0,readlength);
+                }
+                fis.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        } finally {
+            try {
+                bos.flush();
+                bos.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
 	
 }
