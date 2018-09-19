@@ -18,7 +18,7 @@ import com.st.fox.core.commons.constants.ServiceIdConstant;
 @Primary
 public class FwSwaggerResourcesProvider implements SwaggerResourcesProvider {
 
-	private final RouteLocator	routeLocator;
+	private final RouteLocator 	routeLocator;
 
 	public FwSwaggerResourcesProvider(RouteLocator routeLocator) {
 		this.routeLocator = routeLocator;

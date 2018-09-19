@@ -37,7 +37,7 @@ public class FwGatewayApplicationTest {
         System.out.println("=====   jwt:token:liuweijw  fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4="
                 + stringEncryptor.decrypt(" fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4=")) ;
 
-
+     //fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4=
 
 
 		System.out.println("=====encrypt  jwt:token:liuweijw======"

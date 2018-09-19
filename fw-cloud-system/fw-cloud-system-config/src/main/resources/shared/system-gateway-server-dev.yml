@@ -55,6 +55,7 @@ zuul:
         quota: 100
         refresh-interval: 3 #3秒内允许300个访问，平均每个请求2秒，并且要求总请求时间小于2400秒
 
+#zuul-client
 security:
   validate:
     code: false
@@ -69,7 +70,7 @@ security:
       service-id: system-gateway-server
       jwt:
          #key-uri: ${security.auth.server}/oauth/token_key #使用JWT令牌，RSA公开密钥可以用于令牌验证
-         key-value: ENC(fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4=)
+         key-value: ENC(fmVD9Jt6YXP9Q+KBPU8/1cWgKn5WhlGuD10SzFADNz4=) #jwt:token:liuweijw
 #security:
 #  validate:
 #    code: false

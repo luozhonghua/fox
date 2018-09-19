@@ -26,7 +26,8 @@
         <module>fw-cloud-business-demo</module>
         <module>fw-cloud-business-pay</module>
         <module>fw-cloud-business-wechat</module>
-        <module>fw-cloud-business-demo2</module>
+        <module>fw-cloud-business-client1</module>
+        <module>fw-cloud-business-client2</module>
     </modules>
 
 </project>
